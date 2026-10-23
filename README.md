@@ -185,9 +185,28 @@ Potential enhancements include:
 
 ## 📌 Project Status
 
-**Current focus:** Raw-data exploratory analysis and project documentation.
+**Current phase:** Data preparation, exploratory data analysis (EDA), and project documentation.
 
-Further development includes data preparation, SQL-based KPI analysis, and dashboard implementation.
+### Completed
+- Initialized the GitHub repository and established separate branches for team workstreams.
+- Added the raw Superstore dataset to `data/raw/`.
+- Performed an initial data quality audit covering dataset dimensions, missing values, duplicate records, numeric ranges, and potential outliers.
+- Created `scripts/inspect_raw_data.py` for inspecting the raw dataset.
+- Implemented `scripts/clean_data.py` to standardize column names, trim whitespace, normalize categorical values to lowercase, and remove exact duplicates.
+- Preserved missing postal codes and legitimate negative-profit records instead of introducing unsupported assumptions or deleting valid business data.
+- Created `scripts/validate_cleaned_data.py` to verify row counts, column counts, duplicate records, missing values, and date preservation.
+- Generated and validated `data/processed/superstore_cleaned.csv` locally. Generated processed data is excluded from Git through `.gitignore`.
+- Documented initial EDA findings and committed the relevant scripts and results to the `member-3/eda` branch.
+
+### In Progress
+- Further exploratory data analysis using the cleaned dataset.
+- Verification of mixed date formats before parsing order and shipping dates.
+
+### Planned
+- Detailed business analysis and visualizations.
+- SQL-based KPI calculations and business performance analysis.
+- Interactive dashboard development and integration.
+- Final documentation and project presentation.
 
 ## 📄 Data Attribution
 
