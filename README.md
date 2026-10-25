@@ -183,30 +183,21 @@ Potential enhancements include:
 - Automated data refresh and reporting
 - Additional performance metrics and comparative analysis
 
-## 📌 Project Status
-
-**Current phase:** Data preparation, exploratory data analysis (EDA), and project documentation.
+## Project Status — 25 October 2026
 
 ### Completed
-- Initialized the GitHub repository and established separate branches for team workstreams.
-- Added the raw Superstore dataset to `data/raw/`.
-- Performed an initial data quality audit covering dataset dimensions, missing values, duplicate records, numeric ranges, and potential outliers.
-- Created `scripts/inspect_raw_data.py` for inspecting the raw dataset.
-- Implemented `scripts/clean_data.py` to standardize column names, trim whitespace, normalize categorical values to lowercase, and remove exact duplicates.
-- Preserved missing postal codes and legitimate negative-profit records instead of introducing unsupported assumptions or deleting valid business data.
-- Created `scripts/validate_cleaned_data.py` to verify row counts, column counts, duplicate records, missing values, and date preservation.
-- Generated and validated `data/processed/superstore_cleaned.csv` locally. Generated processed data is excluded from Git through `.gitignore`.
-- Documented initial EDA findings and committed the relevant scripts and results to the `member-3/eda` branch.
+- Created a separate cleaned-data EDA notebook: `notebooks/eda_cleaned_data.ipynb`.
+- Performed exploratory analysis covering overall business KPIs, product categories, subcategories, regions, markets, customers, and products.
+- Added `scripts/compare_raw_cleaned.py` to compare key metrics and grouped totals between raw and cleaned datasets.
+- Verified that the key business metrics and grouped sales/profit totals match between the raw and cleaned datasets.
+- Committed and pushed the latest changes to the `member-3/eda` branch.
 
-### In Progress
-- Further exploratory data analysis using the cleaned dataset.
-- Verification of mixed date formats before parsing order and shipping dates.
+### Pending
+- Investigate mixed date formats in `order_date` and `ship_date`.
+- Finalize and validate date parsing before conducting time-based analysis.
+- Continue EDA after resolving the date-format issue.
 
-### Planned
-- Detailed business analysis and visualizations.
-- SQL-based KPI calculations and business performance analysis.
-- Interactive dashboard development and integration.
-- Final documentation and project presentation.
+
 
 ## 📄 Data Attribution
 
