@@ -183,20 +183,24 @@ Potential enhancements include:
 - Automated data refresh and reporting
 - Additional performance metrics and comparative analysis
 
-## Project Status — 25 October 2026
+## Project Status — 28 October 2026
 
 ### Completed
-- Created a separate cleaned-data EDA notebook: `notebooks/eda_cleaned_data.ipynb`.
-- Performed exploratory analysis covering overall business KPIs, product categories, subcategories, regions, markets, customers, and products.
-- Added `scripts/compare_raw_cleaned.py` to compare key metrics and grouped totals between raw and cleaned datasets.
-- Verified that the key business metrics and grouped sales/profit totals match between the raw and cleaned datasets.
-- Committed and pushed the latest changes to the `member-3/eda` branch.
+- Created a cleaned-data EDA notebook: `notebooks/eda_cleaned_data.ipynb`.
+- Performed exploratory analysis covering overall business KPIs, categories, subcategories, regions, markets, customers, and products.
+- Added `scripts/compare_raw_cleaned.py` to compare raw and cleaned dataset metrics and grouped totals.
+- Implemented explicit date parsing in `scripts/clean_data.py` for slash-separated and hyphen-separated date formats.
+- Standardized saved dates to `YYYY-MM-DD`.
+- Added validation to detect unparseable dates and shipping dates earlier than order dates.
+- Verified that the cleaned dataset contains 51,290 rows and 24 columns, with no date parsing failures or shipping-date ordering violations.
+- Confirmed that key business metrics and category, subcategory, and regional sales/profit totals match the raw dataset.
+- Pushed the latest changes to the `member-3/eda` branch.
 
 ### Pending
-- Investigate mixed date formats in `order_date` and `ship_date`.
-- Finalize and validate date parsing before conducting time-based analysis.
-- Continue EDA after resolving the date-format issue.
-
+- Update the cleaned-data EDA notebook to use the standardized date columns.
+- Analyze monthly and yearly sales and profit trends.
+- Create time-series visualizations and identify business patterns.
+- Continue dashboard development and documentation.
 
 
 ## 📄 Data Attribution
