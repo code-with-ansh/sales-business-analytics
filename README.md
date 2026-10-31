@@ -183,24 +183,37 @@ Potential enhancements include:
 - Automated data refresh and reporting
 - Additional performance metrics and comparative analysis
 
-## Project Status — 28 October 2026
+## Project Status
 
 ### Completed
-- Created a cleaned-data EDA notebook: `notebooks/eda_cleaned_data.ipynb`.
-- Performed exploratory analysis covering overall business KPIs, categories, subcategories, regions, markets, customers, and products.
-- Added `scripts/compare_raw_cleaned.py` to compare raw and cleaned dataset metrics and grouped totals.
-- Implemented explicit date parsing in `scripts/clean_data.py` for slash-separated and hyphen-separated date formats.
-- Standardized saved dates to `YYYY-MM-DD`.
-- Added validation to detect unparseable dates and shipping dates earlier than order dates.
-- Verified that the cleaned dataset contains 51,290 rows and 24 columns, with no date parsing failures or shipping-date ordering violations.
-- Confirmed that key business metrics and category, subcategory, and regional sales/profit totals match the raw dataset.
-- Pushed the latest changes to the `member-3/eda` branch.
+- Repository setup and project structure
+- Raw Superstore dataset integration
+- Data cleaning and preprocessing
+- Data quality checks and validation
+- Date standardization and validation
+- Raw vs. cleaned dataset comparison
+- Overall business KPI analysis
+- Category and subcategory analysis
+- Regional and market performance analysis
+- Customer and product analysis
+- Time-based sales and business performance EDA
+  - Yearly sales, profit and growth analysis
+  - Quarterly sales and profit analysis
+  - Year-wise quarterly comparisons
+  - Monthly sales and profit trends
+  - Month-wise year-over-year growth
+  - Monthly seasonality analysis
+  - Average monthly sales, profit and order value
 
-### Pending
-- Update the cleaned-data EDA notebook to use the standardized date columns.
-- Analyze monthly and yearly sales and profit trends.
-- Create time-series visualizations and identify business patterns.
-- Continue dashboard development and documentation.
+### In Progress
+- Shipping performance analysis
+- Advanced business insights and recommendations
+- SQL-based KPI analysis
+- Interactive Power BI dashboard development
+
+### Upcoming
+- Dashboard integration and refinement
+- Final documentation and project presentation
 
 
 ## 📄 Data Attribution
