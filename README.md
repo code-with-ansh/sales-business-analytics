@@ -196,17 +196,27 @@ Potential enhancements include:
 - Category and subcategory analysis
 - Regional and market performance analysis
 - Customer and product analysis
-- Time-based sales and business performance EDA
-  - Yearly sales, profit and growth analysis
-  - Quarterly sales and profit analysis
-  - Year-wise quarterly comparisons
-  - Monthly sales and profit trends
-  - Month-wise year-over-year growth
-  - Monthly seasonality analysis
-  - Average monthly sales, profit and order value
+
+### Time-Based Sales and Business Performance Analysis
+- Yearly sales, profit and growth analysis
+- Quarterly sales and profit analysis
+- Year-wise quarterly comparisons
+- Monthly sales and profit trends
+- Month-wise year-over-year growth
+- Monthly seasonality analysis
+- Average monthly sales, profit and order value
+
+### Shipping Performance Analysis
+- Overall shipping performance KPIs
+- Shipping mode performance comparison
+- Year-wise shipping performance analysis
+- Month-wise shipping performance analysis
+- Shipping duration distribution
+- Delivery speed classification
+- Shipping cost and delivery duration visualizations
+- Business insights and recommendations
 
 ### In Progress
-- Shipping performance analysis
 - Advanced business insights and recommendations
 - SQL-based KPI analysis
 - Interactive Power BI dashboard development
