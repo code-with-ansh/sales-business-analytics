@@ -216,6 +216,17 @@ Potential enhancements include:
 - Shipping cost and delivery duration visualizations
 - Business insights and recommendations
 
+### Discount Impact and Profitability Analysis
+- Discount distribution and frequency analysis
+- Discount range vs. profitability analysis
+- Profit margin comparison across discount ranges
+- Category-wise discount impact analysis
+- Subcategory-wise profitability analysis
+- Furniture-specific discount analysis
+- Discount impact visualizations
+- Identification of loss-making products and discount ranges
+- Business insights and pricing recommendations
+
 ### In Progress
 - Advanced business insights and recommendations
 - SQL-based KPI analysis
