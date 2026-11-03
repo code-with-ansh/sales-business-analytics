@@ -227,6 +227,18 @@ Potential enhancements include:
 - Identification of loss-making products and discount ranges
 - Business insights and pricing recommendations
 
+### Customer Segmentation and RFM Analysis
+- Customer-level Recency, Frequency and Monetary (RFM) calculation
+- Quintile-based RFM scoring
+- Customer segmentation into 9 behavioral groups
+- Champions, Loyal, At Risk and Lost customer identification
+- Customer segment revenue and purchase frequency analysis
+- Customer revenue concentration and Pareto analysis
+- Identification of customers contributing 80% of revenue
+- Customer segment visualizations
+- Segment-specific business strategies and recommendations
+- Export of customer-level RFM and segment summary datasets
+
 ### In Progress
 - Advanced business insights and recommendations
 - SQL-based KPI analysis
