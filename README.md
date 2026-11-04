@@ -239,6 +239,16 @@ Potential enhancements include:
 - Segment-specific business strategies and recommendations
 - Export of customer-level RFM and segment summary datasets
 
+### Customer Cohort & Retention Analysis
+
+- Identified customer acquisition cohorts based on first observed purchase month.
+- Developed a monthly cohort retention matrix covering 48 months.
+- Created cohort retention heatmaps and monthly retention trend visualizations.
+- Calculated average, median and weighted customer retention.
+- Compared strongest and weakest acquisition cohorts.
+- Analyzed retention performance across acquisition years (2011–2014).
+- Identified retention improvement opportunities through cohort-level insights.
+
 ### In Progress
 - Advanced business insights and recommendations
 - SQL-based KPI analysis
