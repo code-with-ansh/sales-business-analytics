@@ -1,0 +1,10 @@
+Customer_Segment,Customers,Total_Sales,Average_Sales,Average_Recency,Average_Frequency,Customer_Percentage,Recommended_Strategy
+Lost Customers,434,771867.41,1778.49633640553,222.82718894009216,5.142857142857143,27.3,Reactivation campaigns with carefully targeted offers
+Champions,344,5437176.4,15805.74534883721,11.656976744186046,28.322674418604652,21.64,"VIP rewards, exclusive benefits and referral programs"
+Loyal Customers,201,2705956.65,13462.470895522387,31.8407960199005,27.29353233830846,12.64,"Loyalty points, personalized offers and upselling"
+Need Attention,150,739243.45,4928.289666666667,21.433333333333334,13.746666666666666,9.43,"Customer feedback, engagement and personalized promotions"
+At Risk Customers,125,712369.85,5698.958799999999,110.608,14.448,7.86,Win-back campaigns and targeted incentives
+Recent Customers,118,243279.74,2061.6927118644066,12.423728813559322,5.9576271186440675,7.42,Welcome offers and second-purchase incentives
+Promising Customers,84,155438.51,1850.4584523809524,37.94047619047619,6.107142857142857,5.28,Engagement campaigns and product recommendations
+At Risk High Value,77,1147135.46,14897.863116883116,76.6103896103896,27.22077922077922,4.84,Priority retention campaigns and personalized outreach
+Potential High Value,57,730034.47,12807.622280701755,19.789473684210527,19.50877192982456,3.58,Premium recommendations and loyalty program enrollment
