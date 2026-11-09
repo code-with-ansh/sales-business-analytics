@@ -249,14 +249,68 @@ Potential enhancements include:
 - Analyzed retention performance across acquisition years (2011–2014).
 - Identified retention improvement opportunities through cohort-level insights.
 
-### In Progress
-- Advanced business insights and recommendations
-- SQL-based KPI analysis
-- Interactive Power BI dashboard development
+### Processed Data Outputs
 
-### Upcoming
-- Dashboard integration and refinement
-- Final documentation and project presentation
+The following analytical datasets are available in `data/processed/`:
+
+- `superstore_cleaned.csv` – Cleaned and validated Superstore dataset containing 51,290 records and 24 columns.
+- `customer_rfm_segments.csv` – Customer-level RFM scores and behavioral segment assignments.
+- `customer_segment_summary.csv` – Aggregated performance metrics for the nine customer segments.
+
+### Project Progress & Roadmap
+
+#### Week 1 & Week 2 – Completed
+
+- Dataset exploration, profiling and data quality assessment.
+- Data cleaning, date standardization and validation.
+- Overall business KPI analysis.
+- Category, subcategory, regional and customer performance analysis.
+- Time-based sales and profit analysis.
+- Shipping performance and delivery duration analysis.
+- Discount impact and profitability analysis.
+- RFM-based customer segmentation into nine behavioral groups.
+- Customer revenue concentration and Pareto analysis.
+- Customer cohort and retention analysis.
+- Export and version control of processed analytical datasets.
+
+#### Week 3 – Planned: Trend Analysis & Business Insights
+
+- Monthly, quarterly and yearly trend analysis.
+- Current-period versus previous-period comparisons.
+- Performance investigation across products, categories, regions and customer segments.
+- Seasonality analysis where sufficient historical data is available.
+- Identification of significant business trends and unusual transactions.
+- Development of evidence-based business recommendations.
+- Supporting visualizations using Matplotlib and Seaborn.
+
+**Expected Deliverables:**
+- Trend analysis notebook.
+- Supporting visualizations.
+- Significant business findings.
+- Draft business recommendations.
+
+#### Week 4 – Planned: Interactive Dashboard & Final Documentation
+
+- SQL-based KPI analysis and structured business queries.
+- Interactive dashboard development using Power BI or Tableau.
+- KPI cards for sales, profit, orders and profitability.
+- Revenue and profit trend visualizations.
+- Product, category and regional performance comparisons.
+- Filters for date, region, product category, customer segment and sales channel where available.
+- Dashboard validation against cleaned analytical datasets.
+- Preparation of the final analytical report and presentation.
+
+**Expected Deliverables:**
+- Interactive dashboard (`.pbix`, Tableau workbook or accessible export).
+- Final analytical report with visualizations and recommendations.
+- Documented source code and GitHub repository.
+- Final project presentation.
+
+---
+
+## Current Project Status
+
+The project has completed its initial data preparation and exploratory analytics phases. The next stages will focus on deeper trend interpretation, SQL-based analysis, interactive business intelligence and final reporting.
 
 
 ## 📄 Data Attribution
