@@ -1,322 +1,303 @@
 # Sales & Business Performance Analytics Dashboard
 
-An interactive business intelligence project designed to analyze sales data and generate actionable insights into revenue, profitability, customer behavior, product performance, and regional trends. The project combines exploratory data analysis (EDA), SQL-based analysis, and dashboard visualization to support data-driven business decisions.
+An end-to-end data analytics project focused on transforming raw retail transaction data into meaningful business insights through data cleaning, exploratory data analysis, customer segmentation, profitability analysis, and business intelligence.
 
-## 📌 Project Overview
+## Project Overview
 
-Businesses generate large amounts of sales data, but raw data alone does not explain which products are profitable, which markets perform well, or where business improvements are needed.
+Businesses generate large volumes of sales data, but raw transactional records do not automatically reveal what drives revenue, where profitability is declining, or which customers contribute the most value.
 
-This project aims to transform raw sales data into meaningful business insights through data analysis, key performance indicators (KPIs), and interactive visualizations.
+This project aims to analyze historical retail sales data and develop a data-driven business performance analytics solution that helps identify sales trends, profitability patterns, customer behavior, and potential business improvement opportunities.
 
-The project is being developed collaboratively, with different team members responsible for data documentation, data cleaning, exploratory data analysis, SQL-based KPIs, and dashboard development.
+The project follows a structured four-week development approach, progressing from data preparation and analytical exploration to business insights and interactive dashboard development.
 
-## 🎯 Project Objectives
+## Problem Statement
 
-- Analyze sales, profit, quantity, and order performance.
-- Identify high-performing and low-performing product categories.
-- Understand customer purchasing patterns.
-- Compare performance across markets, regions, and countries.
-- Examine sales trends over time.
-- Investigate the relationship between discounts and profitability.
-- Develop business KPIs to support management decisions.
-- Present insights through an interactive analytics dashboard.
+The objective is to analyze historical retail sales transactions to answer important business questions:
 
-## 📊 Dataset
+- How are sales and profits performing over time?
+- Which product categories and subcategories contribute most to revenue and profitability?
+- Which regions and markets perform better or worse?
+- How do discounts affect business profitability?
+- Which customers generate the highest revenue?
+- What does customer purchasing and retention behavior reveal?
+- Where should the business focus its improvement efforts?
 
-The project uses the Superstore sales dataset covering the period 2011–2015.
+The ultimate goal is to transform transactional data into actionable business intelligence.
 
-**Raw dataset:** `superstore_dataset2011-2015.csv`
+## Dataset Information
 
-**Location:** `data/raw/`
+**Dataset:** Superstore Dataset (2011–2015)
+**Source:** Kaggle
+**Format:** CSV
 
-The dataset contains transaction-level information, including:
+| Attribute | Details |
+|---|---|
+| Original records | 51,290 |
+| Original columns | 24 |
+| Cleaned records | 51,290 |
+| Cleaned columns | 24 |
+| Data granularity | Order-line level |
+| Historical period | 2011–2014 |
 
-- Order and shipping dates
-- Customer and product details
-- Product categories and sub-categories
-- Sales, quantity, discount, and profit
-- Market, region, country, state, and city
-- Shipping mode and order priority
+The dataset contains information about orders, customers, products, sales, discounts, profits, shipping costs, geographical locations, and order priorities.
 
-The dataset is used for exploratory analysis, data quality assessment, KPI development, and business performance evaluation.
+**Important:** Each row represents an order line, not necessarily a unique order. Distinct `order_id` values are therefore used when calculating order volume.
 
-## 🛠️ Technologies Used
+## Technology Stack
 
-- **Python:** Data analysis and exploratory data analysis
-- **Jupyter Notebook:** Interactive analysis and documentation
-- **Pandas and NumPy:** Data manipulation and numerical analysis
-- **Matplotlib and Seaborn:** Data visualization
-- **SQL:** Business queries and KPI calculations
-- **Power BI:** Business intelligence dashboard development
-- **Git and GitHub:** Version control and team collaboration
+| Technology | Purpose |
+|---|---|
+| Python | Data analysis and processing |
+| Pandas & NumPy | Data manipulation and numerical analysis |
+| Matplotlib & Seaborn | Data visualization |
+| Jupyter Notebook | Exploratory analysis and documentation |
+| Git & GitHub | Version control and team collaboration |
+| SQL | Planned structured querying and KPI analysis |
+| Power BI / Tableau | Planned interactive dashboard development |
 
-## 📁 Project Structure
+## Repository Structure
 
 ```text
 sales-business-analytics/
 │
-├── dashboard/       # Dashboard development files
+├── dashboard/                  # Dashboard development
 ├── data/
-│   ├── raw/         # Original dataset
-│   └── processed/   # Cleaned and transformed data
-├── docs/            # Project documentation
-├── notebooks/       # Jupyter notebooks for analysis
-├── reports/         # Analysis reports and exported results
-├── screenshots/     # Dashboard and analysis screenshots
-├── sql/             # SQL queries and KPI calculations
-├── .gitignore
-└── README.md
+│   ├── raw/                    # Original dataset
+│   └── processed/              # Cleaned and analytical datasets
+│
+├── docs/                       # Project documentation
+├── notebooks/                  # Data analysis notebooks
+├── reports/                    # Analytical reports
+├── screenshots/                # Project visualizations
+├── scripts/                    # Data processing and validation scripts
+├── sql/                        # SQL queries and KPI analysis
+│
+├── README.md
+└── .gitignore
 ```
 
-## 🔍 Exploratory Data Analysis
+## Project Development & Progress
 
-The EDA stage examines the dataset to understand its structure, quality, and business patterns.
+### Week 1 – Data Exploration, Cleaning & Validation
 
-The comprehensive raw-data analysis is documented in:
+<ins>Objective:</ins> Establish a reliable and consistent data foundation for further analysis.
 
-`notebooks/eda_raw_data_complete.ipynb`
+**Work completed:**
 
-The notebook covers:
+- Integrated the original Superstore dataset into the project.
+- Explored dataset structure, dimensions, column names, and data types.
+- Performed missing-value and duplicate-value analysis.
+- Investigated data granularity and unique order identifiers.
+- Standardized inconsistent date formats.
+- Validated order dates and shipping dates.
+- Checked shipping duration, sales, quantity, discount, profit, and shipping cost values.
+- Preserved meaningful negative-profit transactions for profitability analysis.
+- Investigated missing postal codes without unnecessarily deleting records.
+- Created reusable data cleaning and validation scripts.
+- Generated the cleaned dataset.
 
-1. Dataset loading and structural overview
-2. Missing-value and duplicate-record analysis
-3. Date parsing and consistency validation
-4. Descriptive statistics and numerical distributions
-5. Overall business KPI calculations
-6. Sales and profit analysis by category and sub-category
-7. Market, regional, and country-level comparisons
-8. Customer and product performance
-9. Monthly and yearly sales and profit trends
-10. Discount and profitability analysis
+**Key outcome:**
 
-Tables, charts, calculations, and analysis outputs are included in the notebook.
+The cleaned dataset retains all 51,290 records and all 24 original columns, with standardized dates and validated data quality.
 
-## 📈 Key Performance Indicators
+### Week 2 – Exploratory Data Analysis & Business KPI Development
 
-The project examines business metrics such as:
+<ins>Objective:</ins> Understand business performance through quantitative analysis and visual exploration.
 
-| KPI | Description |
+**1. Overall Business KPI Analysis**
+
+- Total sales, total profit, and order volume.
+- Average order value.
+- Overall profit margin.
+- Year-over-year business growth.
+- Category, subcategory, regional, market, customer, and product performance.
+
+**2. Time-Based Sales Analysis**
+
+- Yearly, quarterly, and monthly sales and profit analysis.
+- Year-wise quarterly comparisons.
+- Month-over-month and year-over-year comparisons.
+- Monthly performance patterns and seasonality exploration.
+
+**3. Shipping Performance Analysis**
+
+- Average and median shipping duration.
+- Shipping mode comparisons.
+- Shipping cost analysis.
+- Delivery duration distribution.
+- Fast, standard, and slow delivery classification.
+
+**4. Discount Impact & Profitability Analysis**
+
+- Discount distribution and frequency.
+- Profit margin across discount ranges.
+- Category-wise and subcategory-wise discount analysis.
+- Identification of loss-making discount ranges.
+- Furniture profitability investigation.
+
+**5. Customer Segmentation Using RFM Analysis**
+
+Implemented Recency, Frequency, and Monetary analysis to understand customer purchasing behavior.
+
+Customers were classified into nine behavioral segments:
+
+- Champions
+- Loyal Customers
+- Recent Customers
+- Promising Customers
+- Potential High Value
+- At Risk Customers
+- At Risk High Value
+- Lost Customers
+- Need Attention
+
+Additional analysis included customer revenue contribution, purchase frequency, and Pareto analysis.
+
+**6. Customer Cohort & Retention Analysis**
+
+- Identified customer acquisition cohorts based on first observed purchase month.
+- Developed a monthly cohort retention matrix covering 48 months.
+- Calculated average, median, and weighted retention.
+- Compared acquisition cohorts across different years.
+- Identified stronger and weaker retention patterns.
+
+## Key Business Findings
+
+The following findings have emerged from the completed analysis.
+
+| Metric | Analytical Result |
+|---|---:|
+| Total Sales | $12.64 Million |
+| Total Profit | $1.47 Million |
+| Unique Orders | 25,035 |
+| Overall Profit Margin | ~11.61% |
+| Total Customers | 1,590 |
+| Average Discount | 14.29% |
+| Average Shipping Duration | ~3.97 Days |
+
+**Important analytical insights:**
+
+1. **Business Growth:** Sales increased consistently across the four historical years, with the highest yearly sales recorded in 2014.
+
+2. **Discount Profitability:** Profitability declines as discount levels increase. The 20–30% discount band already shows a negative profit margin, highlighting the importance of profitability-aware discounting.
+
+3. **Product Profitability:** The Tables subcategory records a negative profit margin, identifying an area that deserves further investigation.
+
+4. **Customer Value:** Champions form the largest revenue-generating customer segment, contributing approximately $5.44 million in sales.
+
+5. **Revenue Concentration:** Approximately 42.58% of customers contribute 80.07% of total customer revenue, demonstrating substantial revenue concentration.
+
+6. **Customer Retention:** Weighted Month 1 cohort retention is approximately 18.82%, indicating an opportunity to improve repeat purchasing behavior.
+
+7. **Shipping Performance:** Standard Class accounts for the largest order volume, while Same Day shipping has the shortest average delivery duration.
+
+*Note: These are observational findings from historical data. Associations should not automatically be interpreted as causal relationships. Cohort retention measures observed monthly purchasing activity, not confirmed customer churn.*
+
+## Processed Data Outputs
+
+The following datasets are available in `data/processed/`:
+
+| File | Description |
 |---|---|
-| Total Sales | Total sales value across the dataset |
-| Total Profit | Overall profit generated |
-| Total Quantity | Total units sold |
-| Total Orders | Number of distinct orders |
-| Total Customers | Number of distinct customers |
-| Average Order Value | Average sales value per order |
-| Profit Margin | Profit as a percentage of sales |
+| `superstore_cleaned.csv` | Cleaned and validated Superstore dataset |
+| `customer_rfm_segments.csv` | Customer-level RFM scores and segment assignments |
+| `customer_segment_summary.csv` | Aggregated performance metrics for the nine customer segments |
 
-These metrics provide a foundation for comparing business performance across products, customers, markets, and time periods.
+## Week 3 – Trend Analysis & Business Insight Development
 
-## 👥 Team Workflow
+<badge>Planned</badge>
 
-The project is developed using Git and GitHub with separate branches for different responsibilities.
+**Engineering Focus:** Understand changes over time and translate observed patterns into testable business explanations.
+
+**Planned implementation:**
+
+- Analyze monthly, quarterly, and yearly sales and profit trends.
+- Compare current periods against equivalent previous periods.
+- Investigate performance changes across products, categories, regions, and customer segments.
+- Examine seasonality where sufficient historical cycles are available.
+- Investigate declining sales and low-profitability areas.
+- Evaluate the influence of low-volume periods, missing periods, and unusual transactions.
+- Develop visualizations using Matplotlib and Seaborn.
+- Translate significant findings into evidence-based business recommendations.
+
+**Expected Deliverables:**
+
+- Trend analysis notebook.
+- Supporting visualizations.
+- Documented significant business findings.
+- Draft business recommendations.
+
+## Week 4 – Interactive Dashboard, Final Report & Presentation
+
+<badge>Planned</badge>
+
+**Engineering Focus:** Communicate commercial performance through an interactive business intelligence solution.
+
+**Planned implementation:**
+
+- Develop an interactive dashboard using Power BI or Tableau.
+- Integrate KPI cards for sales, profit, orders, and profitability.
+- Visualize revenue and profit trends.
+- Develop product and category performance rankings.
+- Compare regional business performance.
+- Implement filters for date, region, product category, customer segment, and sales channel where available.
+- Include indicators for declining sales and low profitability.
+- Validate dashboard calculations against cleaned analytical datasets.
+- Prepare final analytical documentation and presentation.
+
+**SQL Integration:**
+
+Structured SQL queries will be developed for business KPI calculations, aggregations, and analytical validation.
+
+**Expected Deliverables:**
+
+- Interactive Power BI or Tableau dashboard.
+- Final analytical report with visualizations and recommendations.
+- Documented code and GitHub repository.
+- Final project presentation.
+
+## Team Collaboration & Version Control
+
+The project is being developed collaboratively by a team of five members using Git and GitHub.
+
+Dedicated branches were created to organize individual responsibilities:
 
 | Branch | Responsibility |
 |---|---|
 | `member-1/data-docs` | Data documentation |
-| `member-2/data-cleaning` | Data cleaning and preparation |
+| `member-2/data-cleaning` | Data cleaning and preprocessing |
 | `member-3/eda` | Exploratory data analysis |
-| `member-4/kpi-sql` | SQL queries and KPI development |
+| `member-4/kpi-sql` | KPI development and SQL analysis |
 | `member-5/dashboard` | Dashboard development |
 
-Team members develop their work on their assigned branches and use commits to record meaningful changes. Pull requests can be used to review and integrate work into the main branch.
+Feature branches, commits, and GitHub collaboration help maintain a structured development workflow and track project progress.
 
-## 🚀 Getting Started
+## Future Scope
 
-### Prerequisites
+Beyond the initial four-week development plan, potential enhancements include:
 
-Install Python, Git, and Jupyter Notebook or Visual Studio Code with the Python and Jupyter extensions.
+- Automated data refresh and reporting.
+- Advanced sales forecasting.
+- Customer churn prediction.
+- Product demand analysis.
+- Profitability optimization.
+- Customer lifetime value estimation.
+- Automated business performance alerts.
 
-### 1. Clone the repository
+## Conclusion
 
-```bash
-git clone https://github.com/code-with-ansh/sales-business-analytics.git
-```
+The project aims to bridge the gap between raw transactional data and meaningful business decisions.
 
-### 2. Navigate to the project directory
+The first two weeks established a reliable data foundation and generated insights into sales performance, discount profitability, shipping efficiency, customer value, and retention behavior.
 
-```bash
-cd sales-business-analytics
-```
-
-### 3. Install the analysis dependencies
-
-```bash
-python -m pip install pandas numpy matplotlib seaborn jupyter
-```
-
-### 4. Open the EDA notebook
-
-```bash
-jupyter notebook notebooks/eda_raw_data_complete.ipynb
-```
-
-Alternatively, open the repository in VS Code and select the notebook.
-
-### 5. Verify the dataset location
-
-Ensure that the raw CSV file exists at:
-
-`data/raw/superstore_dataset2011-2015.csv`
-
-Run the notebook cells sequentially to reproduce the analysis.
-
-## 💡 Expected Outcomes
-
-The project aims to provide:
-
-- A structured understanding of the sales dataset
-- Improved visibility into revenue and profitability
-- Identification of product and market performance patterns
-- Insights into customer behavior and sales trends
-- Reusable KPIs for business reporting
-- An interactive dashboard for exploring business performance
-
-## 🔮 Future Scope
-
-Potential enhancements include:
-
-- Additional interactive filters and drill-downs
-- Advanced customer segmentation
-- Sales forecasting and trend prediction
-- Profitability and discount optimization
-- Automated data refresh and reporting
-- Additional performance metrics and comparative analysis
-
-## Project Status
-
-### Completed
-- Repository setup and project structure
-- Raw Superstore dataset integration
-- Data cleaning and preprocessing
-- Data quality checks and validation
-- Date standardization and validation
-- Raw vs. cleaned dataset comparison
-- Overall business KPI analysis
-- Category and subcategory analysis
-- Regional and market performance analysis
-- Customer and product analysis
-
-### Time-Based Sales and Business Performance Analysis
-- Yearly sales, profit and growth analysis
-- Quarterly sales and profit analysis
-- Year-wise quarterly comparisons
-- Monthly sales and profit trends
-- Month-wise year-over-year growth
-- Monthly seasonality analysis
-- Average monthly sales, profit and order value
-
-### Shipping Performance Analysis
-- Overall shipping performance KPIs
-- Shipping mode performance comparison
-- Year-wise shipping performance analysis
-- Month-wise shipping performance analysis
-- Shipping duration distribution
-- Delivery speed classification
-- Shipping cost and delivery duration visualizations
-- Business insights and recommendations
-
-### Discount Impact and Profitability Analysis
-- Discount distribution and frequency analysis
-- Discount range vs. profitability analysis
-- Profit margin comparison across discount ranges
-- Category-wise discount impact analysis
-- Subcategory-wise profitability analysis
-- Furniture-specific discount analysis
-- Discount impact visualizations
-- Identification of loss-making products and discount ranges
-- Business insights and pricing recommendations
-
-### Customer Segmentation and RFM Analysis
-- Customer-level Recency, Frequency and Monetary (RFM) calculation
-- Quintile-based RFM scoring
-- Customer segmentation into 9 behavioral groups
-- Champions, Loyal, At Risk and Lost customer identification
-- Customer segment revenue and purchase frequency analysis
-- Customer revenue concentration and Pareto analysis
-- Identification of customers contributing 80% of revenue
-- Customer segment visualizations
-- Segment-specific business strategies and recommendations
-- Export of customer-level RFM and segment summary datasets
-
-### Customer Cohort & Retention Analysis
-
-- Identified customer acquisition cohorts based on first observed purchase month.
-- Developed a monthly cohort retention matrix covering 48 months.
-- Created cohort retention heatmaps and monthly retention trend visualizations.
-- Calculated average, median and weighted customer retention.
-- Compared strongest and weakest acquisition cohorts.
-- Analyzed retention performance across acquisition years (2011–2014).
-- Identified retention improvement opportunities through cohort-level insights.
-
-### Processed Data Outputs
-
-The following analytical datasets are available in `data/processed/`:
-
-- `superstore_cleaned.csv` – Cleaned and validated Superstore dataset containing 51,290 records and 24 columns.
-- `customer_rfm_segments.csv` – Customer-level RFM scores and behavioral segment assignments.
-- `customer_segment_summary.csv` – Aggregated performance metrics for the nine customer segments.
-
-### Project Progress & Roadmap
-
-#### Week 1 & Week 2 – Completed
-
-- Dataset exploration, profiling and data quality assessment.
-- Data cleaning, date standardization and validation.
-- Overall business KPI analysis.
-- Category, subcategory, regional and customer performance analysis.
-- Time-based sales and profit analysis.
-- Shipping performance and delivery duration analysis.
-- Discount impact and profitability analysis.
-- RFM-based customer segmentation into nine behavioral groups.
-- Customer revenue concentration and Pareto analysis.
-- Customer cohort and retention analysis.
-- Export and version control of processed analytical datasets.
-
-#### Week 3 – Planned: Trend Analysis & Business Insights
-
-- Monthly, quarterly and yearly trend analysis.
-- Current-period versus previous-period comparisons.
-- Performance investigation across products, categories, regions and customer segments.
-- Seasonality analysis where sufficient historical data is available.
-- Identification of significant business trends and unusual transactions.
-- Development of evidence-based business recommendations.
-- Supporting visualizations using Matplotlib and Seaborn.
-
-**Expected Deliverables:**
-- Trend analysis notebook.
-- Supporting visualizations.
-- Significant business findings.
-- Draft business recommendations.
-
-#### Week 4 – Planned: Interactive Dashboard & Final Documentation
-
-- SQL-based KPI analysis and structured business queries.
-- Interactive dashboard development using Power BI or Tableau.
-- KPI cards for sales, profit, orders and profitability.
-- Revenue and profit trend visualizations.
-- Product, category and regional performance comparisons.
-- Filters for date, region, product category, customer segment and sales channel where available.
-- Dashboard validation against cleaned analytical datasets.
-- Preparation of the final analytical report and presentation.
-
-**Expected Deliverables:**
-- Interactive dashboard (`.pbix`, Tableau workbook or accessible export).
-- Final analytical report with visualizations and recommendations.
-- Documented source code and GitHub repository.
-- Final project presentation.
+The upcoming phases will focus on deeper trend interpretation, structured SQL analysis, and interactive business intelligence, ultimately transforming the analytical work into a practical business performance dashboard.
 
 ---
 
-## Current Project Status
+## Data Attribution
 
-The project has completed its initial data preparation and exploratory analytics phases. The next stages will focus on deeper trend interpretation, SQL-based analysis, interactive business intelligence and final reporting.
+The project uses a Superstore dataset sourced from Kaggle. Dataset usage is subject to the original source's licensing and attribution requirements.
 
-
-## 📄 Data Attribution
-
-The project uses a Superstore dataset sourced from Kaggle. Refer to the original dataset listing for attribution and licensing details.
-
-## 📜 License
+## License
 
 A project license has not yet been specified. Dataset usage remains subject to the original source's terms and license.
