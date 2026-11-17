@@ -86,9 +86,10 @@ SWITCH(
 ## Repository Structure
 
 ```
-├── data/        superstore_cleaned.csv
-├── dashboard/   Power BI report (.pbix) and background image
-└── README.md
+├── data/      superstore_cleaned.csv
+├── README.md
+└──dashboard/   Power BI report (.pbix) and background image
+└──superstore_cleaned.csv
 ```
 
 Adjust the folder names to match your repository.
