@@ -1,3 +1,6 @@
+# sales-business-analytics
+An interactive analytics dashboard that transforms sales data into actionable insights by tracking revenue, profit, order trends, and regional performance. Built using Python, SQL, and Power BI to identify growth opportunities and support data-driven business decisions.
+
 # Sales & Business Performance Analytics Dashboard
 
 An end-to-end data analytics project focused on transforming raw retail transaction data into meaningful business insights through data cleaning, exploratory data analysis, customer segmentation, profitability analysis, and business intelligence.
@@ -26,7 +29,7 @@ The ultimate goal is to transform transactional data into actionable business in
 
 ## Dataset Information
 
-**Dataset:** Superstore Dataset (2011–2015)
+**Dataset:** Superstore transaction dataset (`superstore_dataset2011-2015.csv`; observed dates 2011–2014)
 **Source:** Kaggle
 **Format:** CSV
 
@@ -52,7 +55,7 @@ The dataset contains information about orders, customers, products, sales, disco
 | Matplotlib & Seaborn | Data visualization |
 | Jupyter Notebook | Exploratory analysis and documentation |
 | Git & GitHub | Version control and team collaboration |
-| SQL | Planned structured querying and KPI analysis |
+| SQL | MySQL KPI calculations and grouped sales analysis |
 | Power BI / Tableau | Planned interactive dashboard development |
 
 ## Repository Structure
@@ -93,7 +96,7 @@ sales-business-analytics/
 - Checked shipping duration, sales, quantity, discount, profit, and shipping cost values.
 - Preserved meaningful negative-profit transactions for profitability analysis.
 - Investigated missing postal codes without unnecessarily deleting records.
-- Created reusable data cleaning and validation scripts.
+- Created a reusable data inspection, cleaning, and validation script at `scripts/data_cleaning.py`.
 - Generated the cleaned dataset.
 
 **Key outcome:**
@@ -161,6 +164,68 @@ Additional analysis included customer revenue contribution, purchase frequency, 
 - Compared acquisition cohorts across different years.
 - Identified stronger and weaker retention patterns.
 
+## SQL Analysis 
+
+This section covers KPI calculations and SQL-based business performance analysis using MySQL.
+
+### SQL Files
+
+1. **01_core_kpi_calculations.sql**
+   - Total Sales
+   - Total Profit
+   - Total Orders
+   - Unique Customers
+   - Average Order Value (AOV)
+   - Profit Margin
+
+2. **02_sales_performance_analysis.sql**
+   - Sales and Profit by Region
+   - Sales and Profit by Category
+   - Monthly Sales Trends
+   - Top 10 Products by Sales
+
+3. **03_customer_and_discount_analysis.sql**
+   - Customer-wise Sales and Profit
+   - Top 10 Customers by Sales
+   - Customer Order Frequency
+   - Discount-wise Sales and Profit
+   - Profitability by Discount Band
+
+### Tools Used
+- MySQL
+- MySQL Workbench
+- SQL Aggregation Functions
+- GROUP BY, ORDER BY, CASE and Subqueries
+
+### Key Insights
+- No-discount transactions generated the highest total profit.
+- Higher discount levels were associated with lower profitability.
+- Regional, category-wise and customer-wise analysis helps identify business performance patterns.
+
+## Week 3 – Trend Analysis & Business Insight Development
+
+<badge>Planned</badge>
+
+**Engineering Focus:** Understand changes over time and translate observed patterns into testable business explanations.
+
+**Planned implementation:**
+
+- Analyze monthly, quarterly, and yearly sales and profit trends.
+- Compare current periods against equivalent previous periods.
+- Investigate performance changes across products, categories, regions, and customer segments.
+- Examine seasonality where sufficient historical cycles are available.
+- Investigate declining sales and low-profitability areas.
+- Evaluate the influence of low-volume periods, missing periods, and unusual transactions.
+- Develop visualizations using Matplotlib and Seaborn.
+- Translate significant findings into evidence-based business recommendations.
+
+**Expected Deliverables:**
+
+- Trend analysis notebook.
+- Supporting visualizations.
+- Documented significant business findings.
+- Draft business recommendations.
+
 ## Key Business Findings
 
 The following findings have emerged from the completed analysis.
@@ -193,6 +258,90 @@ The following findings have emerged from the completed analysis.
 
 *Note: These are observational findings from historical data. Associations should not automatically be interpreted as causal relationships. Cohort retention measures observed monthly purchasing activity, not confirmed customer churn.*
 
+## Analysis Methodology & Business Interpretation
+
+This section explains how to present the analysis, why the metrics were selected, and what conclusions the data can and cannot support.
+
+### Business problem and decision context
+
+The analysis addresses a practical retail management problem: headline sales can grow while profit, product mix, customer repeat purchasing, or regional performance deteriorates. A business therefore needs to monitor both scale and return, locate where performance varies, and decide where further investigation or a controlled intervention is worthwhile.
+
+The dataset supports descriptive questions such as “where and when were sales and profit higher?” and “which customers or products contributed most?” It does not by itself establish why a change occurred or predict what will happen next. Treat the results as decision signals for pricing, merchandising, and customer-retention investigations—not as proof that a particular action will cause improvement.
+
+### Source, grain, and data quality
+
+The project uses the Kaggle-distributed Superstore CSV in `data/raw/`. The supplied filename suggests 2011–2015, but the observed order dates run from 2011-01-01 through 2014-12-31. The analysis period is therefore four calendar years (2011–2014), not 2011–2015. The repository does not record a direct Kaggle listing URL or a dataset license; verify the original listing and its attribution terms before redistributing the data.
+
+The dataset has 51,290 rows and 24 fields. A row is an order line, so summing sales/profit is appropriate for line-level totals, but counting rows would overstate orders. Order counts use distinct `order_id`; customer-level metrics use distinct `customer_id`. The records include order and shipping dates, product/category, customer, geography, sales, quantity, discount, profit, and shipping cost. These are historical transactions, not a live feed.
+
+`scripts/data_cleaning.py` runs raw-data inspection, cleaning, validation, and raw-versus-cleaned comparisons in sequence. It standardizes column names and text, removes exact duplicate rows, parses mixed date strings using the verified day-first formats, preserves missing postal codes and negative-profit records, and stops if dates cannot be parsed or a ship date precedes its order date. It reports numeric anomalies (for example nonpositive sales/quantity and discounts outside 0–1) rather than silently deleting them. Retaining loss-making rows is essential because removing them would bias profitability upward.
+
+The combined script validates expected row and column counts, duplicate rows, missing values outside postal code, and string date columns. It also compares totals for sales/profit/quantity, distinct orders/customers, missing postal codes, duplicate counts, and category/subcategory/region sales and profit aggregates with a $0.01 tolerance. Date equivalence is explicitly outside the raw-versus-cleaned comparison.
+
+These are useful transformation and reconciliation checks, not a guarantee that the source is complete or that every business rule is correct. The script requires pandas. Run `python scripts/data_cleaning.py` to regenerate the cleaned file and perform the checks; if results differ, investigate before using the dashboard figures.
+
+### KPI definitions and rationale
+
+Unless a view explicitly says otherwise, calculations use the cleaned order-line data and the selected date/filter context:
+
+| KPI | Definition | Why it is useful / interpretation |
+|---|---|---|
+| Sales | Sum of `sales` | Measures transaction value and business scale; not the same as cash collected or net revenue after returns. |
+| Profit | Sum of `profit` | Tracks the dataset’s recorded profit contribution and surfaces loss-making areas. |
+| Orders | Count of distinct `order_id` | Counts transactions at order level instead of treating each order line as an order. |
+| Customers | Count of distinct `customer_id` | Describes the observed customer base in the selected period; it is not a measure of active or retained customers by itself. |
+| Average order value (AOV) | Total sales ÷ distinct orders | Shows average sales value per order; it can move because of order mix or order size. |
+| Profit margin | Total profit ÷ total sales × 100 | Compares profit with sales on a consistent basis. Use the ratio of totals, not the average of row-level margins. |
+| Average discount | Mean of line-level `discount` | Summarizes the recorded discount rate; it is not a sales-weighted discount unless explicitly recalculated that way. |
+| Shipping duration | Difference between ship and order dates | Describes elapsed calendar days in the records; it is not a carrier service-level measure without promised delivery dates. |
+| RFM | Recency: days since the customer’s last observed order at the dataset end; Frequency: distinct observed orders; Monetary: observed sales sum | Provides a relative customer-value/engagement view for prioritizing follow-up, not a prediction of lifetime value or churn. |
+| Cohort retention | Share of customers first observed in a cohort who place an order again in a later observed month | Shows repeat purchasing in the available history; it does not confirm customer churn when no later order is observed. |
+
+Profitability should be read alongside sales: a high-sales segment can still have low or negative profit. The discount analysis groups line items into discount bands and compares sales, profit, and aggregate margin. The bands are descriptive; discount levels may be associated with other factors such as category or product mix, so the results do not isolate the causal effect of a discount.
+
+### Analysis choices and validation of conclusions
+
+- **Time trends:** Aggregate by month/year to expose seasonality and compare periods. Because the history spans only four years, apparent seasonal patterns are tentative and should not be treated as a stable forecast.
+- **Product and geography:** Compare sales and profit by category, subcategory, and region to distinguish volume from profitability and identify where a deeper operational review may be warranted.
+- **Customer analysis:** Rank customers and summarize RFM segments to focus attention on observed high-value, frequent, or recently inactive customers. Segment names are behavioral labels based on this dataset’s scoring, not permanent customer attributes.
+- **Discounts:** Compare profitability by discount band, then review category/product mix before changing pricing. The analysis is observational and is vulnerable to confounding (for example, larger discounts may be used on different products or situations).
+- **Cohorts:** Assign customers to their first observed purchase month and examine subsequent observed months. Early cohorts have more time to accumulate later activity than recent cohorts; compare only equivalent cohort ages and account for incomplete periods.
+- **Cross-checks:** Reconcile headline KPIs against the SQL aggregations and cleaned-data totals; confirm orders use distinct IDs; compare grouped totals across raw and cleaned files; and sanity-check trends against the underlying period/category summaries. For a dashboard release, test filter interactions and verify displayed totals under both an unfiltered view and selected slices.
+
+These methods validate arithmetic consistency and expose patterns; they do not prove representativeness, causality, or statistical significance. The checks in `scripts/data_cleaning.py` cover data transformation consistency and grouped sales/profit totals, while business interpretation still requires context and follow-up analysis.
+
+### Dashboard design (proposed)
+
+The repository does not yet contain a finished interactive dashboard. A useful first page should have:
+
+1. **KPI cards:** Sales, profit, profit margin, distinct orders, customers, and AOV, all responding consistently to filters.
+2. **Trend panel:** Monthly sales and profit over time, with a year/month selector and clear date range (2011–2014).
+3. **Profitability panel:** Sales versus profit by category/subcategory, plus a discount-band view that makes negative profit or margin visible.
+4. **Geography and product panels:** Regional performance and ranked product/category tables, showing profit as well as sales.
+5. **Customer panel:** RFM segment size and sales contribution, with cohort retention available as a separate view so customer value and repeat activity are not conflated.
+
+Use shared date, region, market, category, and segment filters where supported by the model. The dataset does not contain a sales-channel field, so do not offer a channel filter. Include units, metric definitions, date coverage, and a note that discount and retention results are observational. Validate each dashboard measure against the SQL/Python totals before release, and retain the same order-line versus distinct-order definitions throughout.
+
+### Recommendations to investigate
+
+1. **Review high-discount loss areas:** Examine products and categories in the loss-making discount bands and assess margin, volume, and customer context together. Test any revised discount policy on a controlled subset and monitor both profit and sales before broad rollout.
+2. **Protect profitable customer value:** Prioritize service and relevant offers for high-value RFM groups, while measuring incremental repeat orders and profit rather than campaign response alone.
+3. **Test reactivation thoughtfully:** Pilot targeted outreach to customers with high recency and/or historical spend. Compare against a holdout group to distinguish campaign impact from customers who would have returned anyway.
+4. **Investigate weak product/category performance:** Review product costs, returns, pricing, and assortment decisions for low- or negative-profit areas before discontinuing products or changing prices.
+5. **Use shipping findings as a prompt, not an SLA score:** Compare observed transit durations with carrier commitments and delivery outcomes before making service-level or carrier decisions.
+
+Track changes in profit, margin, repeat purchasing, and sales together. Set a baseline and evaluation period before each intervention; the historical dataset can inform hypotheses, but ongoing or experimental data is needed to measure impact.
+
+### Dataset limitations
+
+- The data is historical and ends in 2014; it cannot represent current customer behavior, current prices, or present-day market conditions.
+- It is a transaction/order-line sample. Order lines within the same order are not independent observations, and customer identities are limited to the identifiers supplied.
+- Missing postal codes are retained; geography analyses at postal-code level may therefore be incomplete. The existence of a field does not imply it is reliable at every geographic granularity.
+- Profit is supplied by the source rather than recomputed from detailed costs. The dataset does not provide all operational context (such as marketing spend, inventory availability, return reasons, or promised delivery dates) needed to explain profit or fulfillment outcomes.
+- There is no sales-channel field, experimental assignment, or external market context. The analysis cannot attribute changes to a promotion, channel, policy, or market event.
+- RFM and cohort labels depend on the observed window and scoring choices. A customer’s first recorded order is only their first observed order in this file, and absence of a later order is not proof of churn.
+- Aggregated patterns can conceal product, customer, or regional mix effects. Treat findings as hypotheses to investigate, not causal claims or guaranteed forecasts.
+
 ## Processed Data Outputs
 
 The following datasets are available in `data/processed/`:
@@ -202,30 +351,6 @@ The following datasets are available in `data/processed/`:
 | `superstore_cleaned.csv` | Cleaned and validated Superstore dataset |
 | `customer_rfm_segments.csv` | Customer-level RFM scores and segment assignments |
 | `customer_segment_summary.csv` | Aggregated performance metrics for the nine customer segments |
-
-## Week 3 – Trend Analysis & Business Insight Development
-
-<badge>Planned</badge>
-
-**Engineering Focus:** Understand changes over time and translate observed patterns into testable business explanations.
-
-**Planned implementation:**
-
-- Analyze monthly, quarterly, and yearly sales and profit trends.
-- Compare current periods against equivalent previous periods.
-- Investigate performance changes across products, categories, regions, and customer segments.
-- Examine seasonality where sufficient historical cycles are available.
-- Investigate declining sales and low-profitability areas.
-- Evaluate the influence of low-volume periods, missing periods, and unusual transactions.
-- Develop visualizations using Matplotlib and Seaborn.
-- Translate significant findings into evidence-based business recommendations.
-
-**Expected Deliverables:**
-
-- Trend analysis notebook.
-- Supporting visualizations.
-- Documented significant business findings.
-- Draft business recommendations.
 
 ## Week 4 – Interactive Dashboard, Final Report & Presentation
 
@@ -240,14 +365,14 @@ The following datasets are available in `data/processed/`:
 - Visualize revenue and profit trends.
 - Develop product and category performance rankings.
 - Compare regional business performance.
-- Implement filters for date, region, product category, customer segment, and sales channel where available.
+- Implement filters for date, region, market, product category, and customer segment where available. The dataset has no sales-channel field.
 - Include indicators for declining sales and low profitability.
 - Validate dashboard calculations against cleaned analytical datasets.
 - Prepare final analytical documentation and presentation.
 
 **SQL Integration:**
 
-Structured SQL queries will be developed for business KPI calculations, aggregations, and analytical validation.
+The repository includes MySQL queries for core KPIs, sales performance, customer analysis, and discount analysis. Reconcile dashboard measures with these queries and the cleaned dataset before release.
 
 **Expected Deliverables:**
 
@@ -297,7 +422,3 @@ The upcoming phases will focus on deeper trend interpretation, structured SQL an
 ## Data Attribution
 
 The project uses a Superstore dataset sourced from Kaggle. Dataset usage is subject to the original source's licensing and attribution requirements.
-
-## License
-
-A project license has not yet been specified. Dataset usage remains subject to the original source's terms and license.
